@@ -395,7 +395,7 @@ public class SuperController {
 //			if any of the keys in the fields map is not in the table's columns, add new column 
 			fields.keySet().removeAll(columns(tableName));
 			for(String f : fields.keySet()) {
-				addColumn(tableName, f, fields.get(f), columns(tableName).get(columns(tableName).size() - 3));
+				addColumn(tableName, f, (String) fields.get(f), columns(tableName).get(columns(tableName).size() - 3));
 			}
 //			e.printStackTrace();
 		}
