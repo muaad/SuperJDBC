@@ -71,7 +71,7 @@ public class PropertiesHelper {
 	}
 	
 	public static void main(String[] args) {
-		set("localhost:3306", "KPos", "muaad", "muaad");
-		System.out.println(get("db.properties"));
+//		set("localhost:3306", "KPos", "muaad", "muaad");
+//		System.out.println(get("db.properties"));
 	}
 }

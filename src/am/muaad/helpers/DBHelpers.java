@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -52,10 +53,17 @@ public class DBHelpers {
 		return query;
 	}
 
-	public String generateCreateTableQuery(String table, Map<String, String> params) {
+	public String generateCreateTableQuery(String table, Map<String, Object> fields) {
 		String query = "CREATE TABLE " + table + " (id int(10) UNSIGNED AUTO_INCREMENT, ";
-		for(String l : params.keySet()) {
-			query += l + " " + params.get(l) + ", ";
+		for(String l : fields.keySet()) {
+			query += l + " " + fields.get(l) + ", ";
+		}
+		if (fields.containsKey("foreign keys")) {
+			@SuppressWarnings("unchecked")
+			List<String> queriesList = (List<String>) fields.get("foreign keys");
+			for(String q : queriesList) {
+				query += q;
+			}
 		}
 		query += "created_at datetime, updated_at datetime, primary key(id))ENGINE = InnoDB";
 		return query;
@@ -80,6 +88,6 @@ public class DBHelpers {
 //		System.out.println(wh.dbFields(h.getClass()));
 //		System.out.println(wh.tableName(h.getClass()));
 //		System.out.println(h.generateCreateTableQuery(wh.tableName(h.getClass()), wh.dbFields(h.getClass())));
-		System.out.println(h.getClass().getFields()[1].getAnnotation(DBField.class).reference());
+//		System.out.println(h.getClass().getFields()[1].getAnnotation(DBField.class).reference());
 	}
 }

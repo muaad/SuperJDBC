@@ -387,7 +387,7 @@ public class SuperController {
 		return show(table, id);
 	}
 	
-	public void createTable(String tableName, Map<String, String> fields) {
+	public void createTable(String tableName, Map<String, Object> fields) {
 		System.out.println(helper.generateCreateTableQuery(tableName, fields));
 		try {
 			connection.createStatement().executeUpdate(helper.generateCreateTableQuery(tableName, fields));

@@ -1,7 +1,9 @@
 package am.muaad.helpers;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -10,13 +12,19 @@ import org.atteo.evo.inflector.English;
 import am.muaad.annotations.DBField;
 
 public class WordsHelper {
-	public Map<String, String> dbFields(Class className) {
-		Map<String, String> fields = new HashMap<String, String>();
+	public Map<String, Object> dbFields(Class className) {
+		List<String> foreignKeys = new ArrayList<String>();
+		Map<String, Object> fields = new HashMap<String, Object>();
 		for(Field f : className.getFields()) {
 			if (f.getAnnotation(DBField.class) != null) {
-				fields.put(f.getName(), convertDataTypes(f.getType().getSimpleName()));
+				String fieldName = f.getName();
+				fields.put(fieldName, convertDataTypes(f.getType().getSimpleName()));
+				if (f.getAnnotation(DBField.class).reference()) {
+					foreignKeys.add("FOREIGN KEY(" + fieldName + ") REFERENCES " + fieldName.substring(0, fieldName.length() - 3) + "(id)");
+				}
 			}
 		}
+		fields.put("foreign keys", foreignKeys);
 		return fields;		
 	}
 	
