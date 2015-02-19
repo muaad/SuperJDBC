@@ -227,7 +227,7 @@ public class SuperController {
 		closeConnection();
 		return all;
 	}
-	
+//	TODO: Use prepared statements instead: http://www.javalobby.org/articles/activeobjects/
 	public List<Map<String, String>> conditionalSelect(String table, String field, String value) {
 		List<Map<String, String>> all = new ArrayList<Map<String, String>>();
 		Map<String, String> record;

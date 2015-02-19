@@ -58,14 +58,15 @@ public class DBHelpers {
 		for(String l : fields.keySet()) {
 			query += l + " " + fields.get(l) + ", ";
 		}
+		query += "created_at datetime, updated_at datetime, primary key(id), ";
 		if (fields.containsKey("foreign keys")) {
 			@SuppressWarnings("unchecked")
 			List<String> queriesList = (List<String>) fields.get("foreign keys");
 			for(String q : queriesList) {
-				query += q;
+				query += q + ", ";
 			}
 		}
-		query += "created_at datetime, updated_at datetime, primary key(id))ENGINE = InnoDB";
+		query = query.substring(0, query.length() - 3) + ")ENGINE = InnoDB";
 		return query;
 	}
 	
