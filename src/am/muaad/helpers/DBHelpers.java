@@ -86,9 +86,9 @@ public class DBHelpers {
 	public static void main(String[] args) {
 		DBHelpers h = new DBHelpers();
 		WordsHelper wh = new WordsHelper();
-//		System.out.println(wh.dbFields(h.getClass()));
-//		System.out.println(wh.tableName(h.getClass()));
-//		System.out.println(h.generateCreateTableQuery(wh.tableName(h.getClass()), wh.dbFields(h.getClass())));
-//		System.out.println(h.getClass().getFields()[1].getAnnotation(DBField.class).reference());
+		System.out.println(wh.dbFields(h.getClass()));
+		System.out.println(wh.tableName(h.getClass()));
+		System.out.println(h.generateCreateTableQuery(wh.tableName(h.getClass()), wh.dbFields(h.getClass())));
+		System.out.println(h.getClass().getFields()[1].getAnnotation(DBField.class).reference());
 	}
 }
